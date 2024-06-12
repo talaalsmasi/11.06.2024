@@ -1,0 +1,173 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>exercise</title>
+    <style>
+        .calculator
+        {
+            display: grid;
+            grid-template-rows: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
+            row-gap: 10px;
+            column-gap: 10px;
+            width: 500px;
+            height: 600px;
+            background-color: #A0D0EA;
+            text-align: center;
+            padding: 10px;
+            margin: auto;
+            margin-top: 50px;
+
+        }
+        .a , .e
+        {
+            color: #4B516E;
+            background-color: #EFEFEF;
+            border-bottom:solid ;
+            border-width: 5px;
+            border-color: #80A5BB;
+            padding: 40px;
+            font-size: x-large;
+        }
+        .b,.c,.d{
+            color: #4B516E;
+            background-color: #EFFF93;
+            border-bottom:solid ;
+            border-width: 5px;
+            border-color: #80A5BB;
+            padding: 40px;
+            font-size: x-large;
+        }
+    </style>
+</head>
+<body style="background-color: #A8BF7E;">
+    <div class="calculator" >
+        <input class="a"  id="result" style="grid-column: 1/5;background-color: #F1FBEB;"></input>
+        <div class="a" onclick="append"('1')>1</div>
+        <div class="a" onclick="append"('2')>2</div>
+        <div class="a" onclick="append"('3')>3</div>
+        <div class="b"onclick="append"('+') id="operator1">+</div>
+        <div class="a"onclick="append"('4') >4</div>
+        <div class="a" onclick="append"('5') >5</div>
+        <div class="a" onclick="append"('6')>6</div>
+        <div class="c" onclick="append"('-') id ="operator2">-</div>
+        <div class="a" onclick="append"('7')>7</div>
+        <div class="a"onclick="append"('8') >8</div>
+        <div class="a" onclick="append"('9')>9</div>
+        <div class="d" onclick="append"('*') id ="operator3">*</div>
+        <div  style="color: #4B516E ;background-color: #FE9FA9;border-bottom: #80A5BB ;border-bottom:solid ;
+        border-width: 5px;
+        border-color: #80A5BB;padding: 40px;font-size: x-large; " >C</div>
+        <div class="a" onclick="append"('0')>0</div>
+        <div class="e">=</div>
+        <div class="b" onclick="append"('/') id="operator4">/</div>
+    </div>
+    <script>
+        const result = document.getElementById("result");
+
+
+function append (input){
+    result.value += input ;
+
+
+}
+function clear (){
+    result.value = "" ;
+
+
+}
+function calculate(){
+    result.value = eval(result.value)
+
+}
+
+
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator Exercise</title>
+    <style>
+        .calculator {
+            display: grid;
+            grid-template-rows: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
+            row-gap: 10px;
+            column-gap: 10px;
+            width: 500px;
+            height: 600px;
+            background-color: #A0D0EA;
+            text-align: center;
+            padding: 10px;
+            margin: auto;
+            margin-top: 50px;
+        }
+        .a, .e {
+            color: #4B516E;
+            background-color: #EFEFEF;
+            border-bottom: solid;
+            border-width: 5px;
+            border-color: #80A5BB;
+            padding: 40px;
+            font-size: x-large;
+            cursor: pointer;
+        }
+        .b, .c, .d {
+            color: #4B516E;
+            background-color: #EFFF93;
+            border-bottom: solid;
+            border-width: 5px;
+            border-color: #80A5BB;
+            padding: 40px;
+            font-size: x-large;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body style="background-color: #A8BF7E;">
+    <div class="calculator">
+        <input class="a" id="result" style="grid-column: 1/5; background-color: #F1FBEB;" readonly>
+        <div class="a" onclick="append('1')">1</div>
+        <div class="a" onclick="append('2')">2</div>
+        <div class="a" onclick="append('3')">3</div>
+        <div class="b" onclick="append('+')">+</div>
+        <div class="a" onclick="append('4')">4</div>
+        <div class="a" onclick="append('5')">5</div>
+        <div class="a" onclick="append('6')">6</div>
+        <div class="c" onclick="append('-')">-</div>
+        <div class="a" onclick="append('7')">7</div>
+        <div class="a" onclick="append('8')">8</div>
+        <div class="a" onclick="append('9')">9</div>
+        <div class="d" onclick="append('*')">*</div>
+        <div style="color: #4B516E; background-color: #FE9FA9; border-bottom: #80A5BB; border-bottom: solid; border-width: 5px; border-color: #80A5BB; padding: 40px; font-size: x-large; cursor: pointer;" onclick="clearResult()">C</div>
+        <div class="a" onclick="append('0')">0</div>
+        <div class="e" onclick="calculate()">=</div>
+        <div class="b" onclick="append('/')">/</div>
+    </div>
+    <script>
+        const result = document.getElementById("result");
+
+        function append(input) {
+            result.value += input;
+        }
+
+        function clearResult() {
+            result.value = "";
+        }
+
+        function calculate() {
+            try {
+                result.value = eval(result.value);
+            } catch (e) {
+                result.value = "Error";
+            }
+        }
+    </script>
+</body>
+</html>

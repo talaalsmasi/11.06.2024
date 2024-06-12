@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 2</title>
+    <script src="https://kit.fontawesome.com/1ec8c0ecbd.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #EDEDED;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 70%;
+            background-color: #EDEDED;
+        }
+        #items {
+            display: flex;
+            justify-content: space-between;
+            gap: 5vh;
+            margin-bottom: 20px;
+        }
+        .card {
+            width: 30%;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .details {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .details div {
+            margin: 5px 0;
+        }
+        .add {
+            background-color: #3164F4;
+            color: white;
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        #shoppingcart {
+            width: 100%;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #cart {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .cart-item img {
+            width: 90px;
+            height: 90px;
+            border-radius: 10px;
+        }
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+        }
+        .quantity-controls div {
+            background-color: black;
+            color: white;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .quantity-controls input {
+            width: 50px;
+            text-align: center;
+            border: none;
+            outline: none;
+            margin: 0 5px;
+        }
+        .total-price {
+            font-size: 18px;
+        }
+        .remove-item {
+            cursor: pointer;
+            font-size: 20px;
+        }
+        #total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            font-size: 24px;
+        }
+        #total div:first-child {
+            font-weight: bold;
+        }
+        #totalAmount {
+            font-size: 24px;
+            color: blue;
+        }
+        button {
+            background-color: #3164F4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="items">
+            <div class="card">
+                <img src="https://th.bing.com/th/id/OIP.b-lNqeF8BGfe59gGK3xQgQAAAA?pid=ImgDet&w=190&h=119&c=7&dpr=1.3" alt="iphone 13 pro">
+                <div class="details">
+                    <div>iphone 13 pro</div>
+                    <div>900jd</div>
+                </div>
+                <div class="add" onclick="addToCart('iphone 13 pro', 900, 'https://th.bing.com/th/id/OIP.b-lNqeF8BGfe59gGK3xQgQAAAA?pid=ImgDet&w=190&h=119&c=7&dpr=1.3')">add to cart</div>
+            </div>
+            <div class="card">
+                <img src="https://th.bing.com/th/id/OIP.K9SA1yVpKL1YpwaeNJno7gAAAA?pid=ImgDet&w=192&h=192&c=7&dpr=1.3" alt="headset">
+                <div class="details">
+                    <div>headset</div>
+                    <div>150jd</div>
+                </div>
+                <div class="add" onclick="addToCart('headset', 150, 'https://th.bing.com/th/id/OIP.K9SA1yVpKL1YpwaeNJno7gAAAA?pid=ImgDet&w=192&h=192&c=7&dpr=1.3')">add to cart</div>
+            </div>
+            <div class="card">
+                <img src="https://th.bing.com/th/id/OIP.Wk26Gi9Zj9cSb_EqNWhJkgHaE7?pid=ImgDet&w=192&h=128&c=7&dpr=1.3" alt="keyboard">
+                <div class="details">
+                    <div>keyboard</div>
+                    <div>60jd</div>
+                </div>
+                <div class="add" onclick="addToCart('keyboard', 60, 'https://th.bing.com/th/id/OIP.Wk26Gi9Zj9cSb_EqNWhJkgHaE7?pid=ImgDet&w=192&h=128&c=7&dpr=1.3')">add to cart</div>
+            </div>
+        </div>
+        <div id="shoppingcart">
+            <div id="cart"></div>
+            <div id="total">
+                <div>total</div>
+                <div id="totalAmount">0</div>
+            </div>
+            <div style="text-align: right;">
+                <button onclick="saveCart()">save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cartItems = [];
+        
+        function addToCart(itemName, itemPrice, itemImage) {
+            let item = cartItems.find(i => i.name === itemName);
+            if (item) {
+                item.quantity++;
+            } else {
+                cartItems.push({ name: itemName, price: itemPrice, image: itemImage, quantity: 1 });
+            }
+            renderCart();
+            calculateTotal();
+        }
+
+        function removeFromCart(itemName) {
+            cartItems = cartItems.filter(item => item.name !== itemName);
+            renderCart();
+            calculateTotal();
+        }
+
+        function updateQuantity(itemName, amount) {
+            let item = cartItems.find(i => i.name === itemName);
+            if (item) {
+                item.quantity += amount;
+                if (item.quantity <= 0) {
+                    removeFromCart(itemName);
+                } else {
+                    renderCart();
+                    calculateTotal();
+                }
+            }
+        }
+
+        function calculateTotal() {
+            let total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('totalAmount').textContent = total + "jd";
+        }
+
+        function renderCart() {
+            const cartDiv = document.getElementById('cart');
+            cartDiv.innerHTML = '';
+            cartItems.forEach(item => {
+                const cartItemDiv = document.createElement('div');
+                cartItemDiv.className = 'cart-item';
+                cartItemDiv.innerHTML = `
+                    <div><img src="${item.image}" alt="${item.name}"></div>
+                    <div class="quantity-controls">
+                        <div onclick="updateQuantity('${item.name}', -1)">-</div>
+                        <input type="number" value="${item.quantity}" readonly>
+                        <div onclick="updateQuantity('${item.name}', 1)">+</div>
+                    </div>
+                    <div class="total-price">${item.price * item.quantity}jd</div>
+                    <div class="remove-item" onclick="removeFromCart('${item.name}')">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </div>
+                `;
+                cartDiv.appendChild(cartItemDiv);
+            });
+        }
+
+        function saveCart() {
+            alert('Cart saved!');
+        }
+    </script>
+</body>
+</html>
